@@ -1,15 +1,28 @@
-# TodoList app - React
+# TodoList App — React
 
-As on : 26/11/25 final looks: 
-![asOftoday](src/assets/4.gif)
+A simple and functional TodoList application built using **React**.  
+Styled with **Tailwind CSS** and created using **Vite**.
 
-As on : 24/11/25 
-![asOftoday](src/assets/3.gif)
+---
 
-As on : 23/11/25 21:15 IST
-![asOftoday](src/assets/2.png)
+## 📌 Final Look (as of 26/11/25)
+![Final Preview](src/assets/4.gif)
 
-start date : 23/11/25 11:30 IST
-![asOnToday](src/assets/1.png)
+---
 
+## 📆 Progress History
+
+### 24/11/25
+![Preview 24 Nov](src/assets/3.gif)
+
+### 23/11/25 — 21:15 IST
+![Preview 23 Nov](src/assets/2.png)
+
+---
+
+### 🟢 Project Start  
+**Start Date:** 23/11/25 — 11:30 IST  
+![Initial Look](src/assets/1.png)
+
+---
 
