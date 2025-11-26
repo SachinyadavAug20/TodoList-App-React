@@ -12,8 +12,10 @@ function App() {
     const [tasks, setTasks] = useState([])//here all our todos lie
     const [rerender, setRerender] = useState(true);
     const [savestate, setSavestate] = useState(false);
+    const [hiddeCompletedTodos, setHiddeCompltedTodos] = useState(true);
     function saveToLocalStorage() {
         localStorage.setItem("Todos", JSON.stringify(tasks))//as localstorage can only have strings
+
 
     }
 
@@ -45,7 +47,7 @@ function App() {
             if (savestate) {
                 setSavestate(false)
             }
-        saveToLocalStorage()
+            saveToLocalStorage()
         }
     }
 
@@ -64,37 +66,52 @@ function App() {
 
 
     return (
-        <div className='bg-slate-900 text-black font-sans h-[100vh]'>
+        <div className='bg-gradient-to-tr from-teal-600 to-zinc-700 text-black font-sans h-[100vh]'>
             <Navbar />
-            <div className='bg-slate-500 p-5 text-center min-h-[80%] border-gray-300 rounded-3xl border-[0.5px] Main_page_for_todo_list ml-20 my-6 w-[91.5%] box-border overflow-auto'>
+            <div className='bg-gradient-to-r from-green-900 to-emerald-900 p-3 sm:p-4 lg:p-5 text-center min-h-[80%] border-gray-300 rounded-xl sm:rounded-2xl lg:rounded-3xl border-[0.5px] Main_page_for_todo_list mx-2 sm:mx-4 lg:ml-20 my-3 sm:my-4 lg:my-6 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] lg:w-[91.5%] box-border overflow-auto pb-1'>
 
-                <div className='input_of_todo flex gap-3 flex-col'>
-
-                    <span className=' text-xl font-semibold justify-self-start shadow-transparent'>Add new task</span>
+                <div className='input_of_todo flex gap-2 sm:gap-3 flex-col'>
+                    <span className='text-lg sm:text-xl lg:text-2xl font-semibold text-white justify-self-start shadow-transparent'>Add new task</span>
                     <div className='flex items-center gap-0 justify-center'>
-                        <input className='pl-4 py-2 w-[50%]  outline-black outline rounded-tl-3xl hover:rounded-bl-3xl rounded-r-0 hover:rounded-t-[0px] focus:rounded-tl-xl focus:rounded-bl-3xl focus:outline-blue-700 focus:outline-[3px] text-lg font-mono' type="text" placeholder={addedtaskplaceholder} onChange={(e) => { setaddetask(e.target.value) }} name="usrTodoAdded" value={addedtask} />
-                        <button onClick={handleAdd} type="button" className={savestate ? 'bg-blue-600 hover:absolute hover:w-[45%] hover:rounded-3xl border-[4px] border-black rounded-r-full px-2 text-2xl font-semibold text-gray-800 py-1 hover:text-white hover:bg-green-600 hover:scale-[120%] scale-105 transition-transform duration-250' : 'bg-blue-600 hover:absolute hover:w-[45%] hover:rounded-3xl border-[4px] border-black rounded-r-full px-2 py-0 text-4xl hover:text-white hover:bg-green-600 hover:scale-[120%] scale-105 transition-transform duration-250'}>{savestate ? 'Save' : '+'}</button>
+                        <input className='pl-3 sm:pl-4 py-1 sm:py-2 w-full sm:w-[70%] lg:w-[50%] outline-black outline rounded-tl-xl sm:rounded-tl-2xl lg:rounded-tl-3xl hover:rounded-bl-xl sm:hover:rounded-bl-2xl lg:hover:rounded-bl-3xl rounded-r-0 hover:rounded-t-[0px] focus:rounded-tl-lg sm:focus:rounded-tl-xl lg:focus:rounded-tl-xl focus:rounded-bl-xl sm:focus:rounded-bl-2xl lg:focus:rounded-bl-3xl focus:outline-blue-700 focus:outline-[2px] sm:focus:outline-[3px] text-base sm:text-lg font-mono' type="text" placeholder={addedtaskplaceholder} onChange={(e) => { setaddetask(e.target.value) }} name="usrTodoAdded" value={addedtask} />
+                        <button onClick={handleAdd} type="button" className={savestate ? 'bg-blue-600 hover:absolute hover:w-[90%] sm:hover:w-[100%] lg:hover:w-[105%] hover:rounded-xl sm:hover:rounded-2xl lg:hover:rounded-3xl border-[2px] sm:border-[3px] lg:border-[4px] border-black rounded-r-lg sm:rounded-r-xl lg:rounded-r-full px-2 sm:px-3 text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 py-1 disabled:bg-red-800 hover:text-white hover:bg-green-500 hover:scale-[105%] sm:hover:scale-[110%] lg:hover:scale-[120%] scale-100 sm:scale-105 transition-transform duration-250' : 'bg-blue-600 hover:absolute hover:w-[90%] sm:hover:w-[60%] lg:hover:w-[45%] hover:rounded-xl sm:hover:rounded-2xl lg:hover:rounded-3xl border-[2px] sm:border-[3px] lg:border-[4px] border-black rounded-r-lg sm:rounded-r-xl lg:rounded-r-full px-2 sm:px-3 py-0 text-2xl sm:text-3xl lg:text-4xl hover:text-white hover:bg-green-500 hover:scale-[105%] sm:hover:scale-[110%] lg:hover:scale-[120%] scale-100 sm:scale-105 transition-transform duration-250'}>{savestate ? 'Save' : '+'}</button>
                     </div>
                 </div>
 
-                <div className={tasks.length == 0 ? 'todos flex-col flex px-3 justify-center items-start gap-3 min-h-[50vh] border-gray-300 border py-5 bg-slate-400 rounded-3xl my-6' : 'todos flex-col flex px-3 justify-center items-start gap-3 border-gray-300 border py-5 bg-slate-400 rounded-3xl my-6'}>
-                    {tasks.length != 0 && <span className='px-15 py-5 text-2xl place-self-start justify-self-start font-bold'>Your todos :-</span>}
-                    {tasks.length == 0 && <div className='px-2 flex flex-col gap-1 justify-center w-[100%] h-[100%] items-center'><div className='text-gray-700 text-4xl font-mono font-semibold'>No todo to display </div><div className='text-lg font-mono font-thin text-gray-500'>Add some todos to your plan</div></div>}
-                    {tasks.map((todo) => {
-                        return <div key={todo.id} className='todo flex gap-3 w-[80%] bg-blue-500 rounded-xl border border-gray-300 justify-between hover:bg-blue-600 place-self-center px-5 transition-all duration-300 py-2'>
-                            <div className='flex gap-3 justify-center items-center'>
-                                <div className='check_box'>
-                                    <input className='scale-[165%] border-[2px] border-gray-500 accent-green-400' onChange={(e) => { if (e.target.checked) { todo.isComplete = true; setRerender(!rerender) } else { todo.isComplete = false; setRerender(!rerender) } }} type="checkbox" name="" value="" />
-                                </div>
-                                <div className={todo.isComplete ? 'line-through descOfTodo text-balance text-lg' : 'descOfTodo text-balance text-lg'}>
-                                    {todo.addedtask}                               </div>
-                            </div>
-                            <div className='optios flex gap-5 text-white'>
-                                <button onClick={(e) => { handleEdit(e, todo.uuid) }} className='bg-blue-800 px-2 py-1 transition-all duration-150 hover:bg-green-600 hover:font-semibold border rounded-lg' type="button">Edit</button>
-                                <button onClick={() => { handleDelete(todo.uuid) }} className='bg-blue-800 px-2 py-1 htransition-all duration-150 hover:bg-green-600 hover:font-semibold border rounded-lg' type="button">Delete</button>
-                            </div>
+                <div className={tasks.length == 0 ? 'todos flex-col flex px-2 sm:px-3 justify-center items-start gap-2 sm:gap-3 min-h-[50vh] border-gray-300 border py-3 sm:py-5 bg-gradient-to-tr from-slate-600 to-stone-800 rounded-xl sm:rounded-2xl lg:rounded-3xl my-3 sm:my-4 lg:my-6' : 'todos bg-gradient-to-tr from-slate-600 to-stone-800 flex-col flex px-2 sm:px-3 justify-center items-start gap-2 sm:gap-3 border-gray-300 border py-3 sm:py-5 bg-slate-400 rounded-xl sm:rounded-2xl lg:rounded-3xl my-3 sm:my-4 lg:my-6'}>
+                    {tasks.length != 0 && <div className='flex flex-col sm:flex-row w-[100%] justify-between px-2 sm:px-10 lg:px-40 gap-2 sm:gap-0'>
+                        <span className='px-2 sm:px-4 lg:px-15 py-2 sm:py-3 lg:py-5 text-lg sm:text-xl lg:text-2xl text-white place-self-start justify-self-start font-bold'>Your todos :-</span>
+                        <div className={hiddeCompletedTodos ? 'px-2 sm:px-6 lg:px-12 flex gap-2 sm:gap-3 justify-center font-bold text-green-800 items-center drop-shadow-2xl shadow-white' : 'px-2 sm:px-6 lg:px-12 font-bold text-gray-200 flex gap-2 sm:gap-3 justify-center items-center'}>
+                            <input className='scale-[140%] sm:scale-[150%] lg:scale-[170%] text-green-500 font-bold accent-lime-300' type="checkbox" onClick={() => {
+                                setHiddeCompltedTodos(!hiddeCompletedTodos)
+                            }} name="showFinsihed" checked={hiddeCompletedTodos} />
+                            <div className='text-sm sm:text-base lg:text-lg'>Show All</div>
                         </div>
-                    })}
+                    </div>
+                    }
+                    {tasks.length == 0 && <div className='px-2 flex flex-col gap-1 justify-center w-[100%] h-[100%] items-center'>
+                        <div className='text-gray-800 text-xl sm:text-2xl lg:text-4xl font-mono font-semibold text-center'>No todo to display </div>
+                        <div className='text-sm sm:text-base lg:text-lg font-mono font-thin text-gray-500 text-center'>Add some todos to your plan</div>
+                    </div>}
+                    <div className='h-[50vh] overflow-auto w-full flex flex-col gap-3'>
+
+                        {tasks.map((todo) => {
+                            return (hiddeCompletedTodos || !todo.isComplete) && <div key={todo.id} className='todo flex flex-col sm:flex-row gap-2 sm:gap-3 w-[95%] sm:w-[90%] lg:w-[80%] bg-blue-500 rounded-lg sm:rounded-xl border border-gray-300 justify-between hover:bg-blue-600 place-self-center px-3 sm:px-4 lg:px-5 transition-all duration-300 py-2 sm:py-3'>
+                                <div className='flex gap-2 sm:gap-3 justify-center items-center w-full sm:w-auto'>
+                                    <div className='check_box'>
+                                        <input className='scale-[140%] sm:scale-[150%] lg:scale-[165%] border-[2px] border-gray-500 accent-green-400' onChange={(e) => { if (e.target.checked) { todo.isComplete = true; setRerender(!rerender) } else { todo.isComplete = false; setRerender(!rerender) } }} type="checkbox" name="" value="" />
+                                    </div>
+                                    <div className={todo.isComplete ? 'line-through font-semibold descOfTodo text-gray-700 text-balance text-sm sm:text-base lg:text-lg break-words w-full' : 'descOfTodo font-semibold  text-balance text-sm sm:text-base lg:text-lg break-words w-full'}>
+                                        {todo.addedtask}
+                                    </div>
+                                </div>
+                                <div className='optios flex gap-2 sm:gap-3 lg:gap-5 text-white justify-end sm:justify-start mt-2 sm:mt-0'>
+                                    <button onClick={(e) => { handleEdit(e, todo.uuid) }} className='bg-blue-800 px-12 font-normal sm:px-3 py-1 text-sm sm:text-base transition-all duration-150 hover:bg-green-600 hover:font-semibold border rounded-md sm:rounded-lg' type="button">Edit</button>
+                                    <button onClick={() => { handleDelete(todo.uuid) }} className='bg-blue-800 px-2 sm:px-3 py-1 text-sm sm:text-base transition-all duration-150 hover:bg-green-600 hover:font-semibold border rounded-md sm:rounded-lg' type="button">Delete</button>
+                                </div>
+                            </div>
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
