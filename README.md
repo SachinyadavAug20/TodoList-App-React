@@ -5,12 +5,16 @@ Styled with **Tailwind CSS** and created using **Vite**.
 
 ---
 
-## 📌 Final Look (as of 26/11/25)
-![Final Preview](src/assets/4.gif)
+## 📌 Final Look (as of 29/11/25)
+![Final Preview](src/assets/5.gif)
 
 ---
 
 ## 📆 Progress History
+
+### 26/11/25
+![Preview 26 Nov](src/assets/4.gif)
+
 
 ### 24/11/25
 ![Preview 24 Nov](src/assets/3.gif)
